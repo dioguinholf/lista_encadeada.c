@@ -135,3 +135,42 @@ int remover(tlista *L, int pos, telem *elem) {
     free(p);
     return 1;
 }
+
+// Exibe todos os elementos da lista
+void exibirLista(tlista L) {
+    if (vazia(L)) {
+        printf("\nLista Vazia!\n");
+        return;
+    }
+
+    tlista p = L;
+    printf("\nConteúdo da Lista: [ ");
+    while (p != NULL) {
+        printf("%d ", p->dado);
+        p = p->prox;
+    }
+    printf("]\n");
+}
+
+// Esvazia completamente a lista encadeada
+void esvaziar(tlista *L) {
+    tlista p = *L;
+    tlista temp;
+
+    while (p != NULL) {
+        temp = p->prox;
+        free(p);
+        p = temp;
+    }
+
+    *L = NULL;
+    printf("\nLista esvaziada com sucesso!\n");
+}
+
+int main() {
+    tlista L;
+    criar(&L); // a) crie uma lista L
+
+    int opcao = 0;
+    int pos, ok;
+    telem valor;
