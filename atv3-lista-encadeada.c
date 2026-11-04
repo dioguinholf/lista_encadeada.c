@@ -1,3 +1,11 @@
+/*
+ * Algoritmos e Estrutura de Dados - Aula 3
+ * Lista Encadeada - Editor de Listas
+ *
+ * Diogo Lopes de França, Polo Gravatá - PE
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -174,3 +182,90 @@ int main() {
     int opcao = 0;
     int pos, ok;
     telem valor;
+
+    // b) menu de opções[cite: 26]
+    do {
+        printf("\n=============================\n");
+        printf("       EDITOR DE LISTAS      \n");
+        printf("=============================\n");
+        printf("1 - EXIBIR LISTA\n");
+        printf("2 - INSERIR\n");
+        printf("3 - REMOVER\n");
+        printf("4 - EXIBIR ELEMENTO\n");
+        printf("5 - EXIBIR POSICAO\n");
+        printf("6 - ESVAZIAR\n");
+        printf("7 - SAIR (ESC)\n");
+        printf("-----------------------------\n");
+        printf("DIGITE SUA OPCÃO: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                exibirLista(L);
+                break;
+
+            case 2:
+                printf("Digite a posição para inserção: ");
+                scanf("%d", &pos);
+                printf("Digite o valor a ser inserido: ");
+                scanf("%d", &valor);
+                
+                if (inserir(&L, pos, valor)) {
+                    printf("Elemento inserido com sucesso!\n");
+                } else {
+                    printf("Erro ao inserir: posição inválida ou memória insuficiente.\n");
+                }
+                break;
+
+            case 3:
+                printf("Digite a posição do elemento a remover: ");
+                scanf("%d", &pos);
+                
+                if (remover(&L, pos, &valor)) {
+                    printf("Elemento %d removido com sucesso da posição %d!\n", valor, pos);
+                } else {
+                    printf("Erro ao remover: posição inválida ou lista vazia.\n");
+                }
+                break;
+
+            case 4:
+                printf("Digite a posição do elemento desejado: ");
+                scanf("%d", &pos);
+                
+                if (elemento(L, pos, &valor)) {
+                    printf("Elemento na posição %d: %d\n", pos, valor);
+                } else {
+                    printf("Posição inválida ou lista vazia.\n");
+                }
+                break;
+
+            case 5:
+                printf("Digite o valor a procurar: ");
+                scanf("%d", &valor);
+                
+                pos = posicao(L, valor);
+                if (pos != 0) {
+                    printf("O valor %d está na posição: %d\n", valor, pos);
+                } else {
+                    printf("Valor %d não encontrado na lista.\n", valor);
+                }
+                break;
+
+            case 6:
+                esvaziar(&L);
+                break;
+
+            case 7:
+                printf("Saindo do programa...\n");
+                esvaziar(&L);
+                break;
+
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+                break;
+        }
+
+    } while (opcao != 7);
+
+    return 0;
+}
