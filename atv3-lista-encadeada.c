@@ -61,3 +61,19 @@ int posicao(tlista L, telem valor) {
     }
     return 0;
 }
+
+// 6. Inserir um elemento na lista, dada a sua posição
+int inserir(tlista *L, int pos, telem valor) {
+    tlista p, novo;
+    int n;
+
+    /* Inserção em lista vazia */
+    if (*L == NULL) {
+        if (pos != 1) return 0; /* erro: posição inválida */
+        novo = (tlista) malloc(sizeof(tno));
+        if (novo == NULL) return 0; /* erro: memória insuficiente */
+        novo->dado = valor;
+        novo->prox = NULL;
+        *L = novo;
+        return 1;
+    }
