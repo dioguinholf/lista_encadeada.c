@@ -77,3 +77,30 @@ int inserir(tlista *L, int pos, telem valor) {
         *L = novo;
         return 1;
     }
+
+    /* Inserção na primeira posição em lista não vazia */
+    if (pos == 1) {
+        novo = (tlista) malloc(sizeof(tno));
+        if (novo == NULL) return 0; /* erro: memória insuficiente */
+        novo->dado = valor;
+        novo->prox = *L;
+        *L = novo;
+        return 1;
+    }
+
+/* Inserção após a primeira posição em lista não vazia */
+    p = *L;
+    n = 1;
+    while ((n < pos - 1) && (p != NULL)) {
+        p = p->prox;
+        n++;
+    }
+
+    if (p == NULL) return 0; /* erro: posição inválida */
+    novo = (tlista) malloc(sizeof(tno));
+    if (novo == NULL) return 0; /* erro: memória insuficiente */
+    novo->dado = valor;
+    novo->prox = p->prox;
+    p->prox = novo;
+    return 1;
+}
