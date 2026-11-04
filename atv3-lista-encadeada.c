@@ -104,3 +104,34 @@ int inserir(tlista *L, int pos, telem valor) {
     p->prox = novo;
     return 1;
 }
+
+// 7. Remover um elemento de uma determinada posição
+int remover(tlista *L, int pos, telem *elem) {
+    tlista a = NULL, p;
+    int n;
+
+    if (vazia(*L)) return 0; /* erro: lista vazia */
+
+    p = *L;
+    n = 1;
+
+    // Navega até a posição desejada guardando o nó anterior (a)
+    while ((n < pos) && (p != NULL)) {
+        a = p;
+        p = p->prox;
+        n++;
+    }
+
+    if (p == NULL) return 0; /* erro: posição inválida */
+
+    *elem = p->dado;
+
+    if (pos == 1) {
+        *L = p->prox;
+    } else {
+        a->prox = p->prox;
+    }
+
+    free(p);
+    return 1;
+}
